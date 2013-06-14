@@ -16,9 +16,4 @@ class android::sdk {
     ensure  => $android::config::sdk_version,
     require => Class['java'],
   }
-
-  file { "${boxen::config::envdir}/android.sh":
-    content => template('android/env.sh.erb'),
-    require => File[$boxen::config::envdir],
-  }
 }

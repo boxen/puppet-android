@@ -4,5 +4,8 @@
 class android {
   include android::config
 
-  $root = $android::config::sdk_dir
+  file { "${boxen::config::envdir}/android.sh":
+    content => template('android/env.sh.erb'),
+    require => File[$boxen::config::envdir],
+  }
 }

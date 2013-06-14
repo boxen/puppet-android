@@ -11,7 +11,7 @@ define android::definition(
     fail('\'dest_path\' not defined')
   }
 
-  $dest = "${android::root}/${dest_path}"
+  $dest = "${android::config::sdk_dir}/${dest_path}"
 
   if $ensure == 'absent' {
     file { $dest:
@@ -20,7 +20,7 @@ define android::definition(
     }
   } else {
     exec { "android-update-${filter}":
-      command  => "${android::root}/bin/android update sdk --all --no-ui --filter ${filter}",
+      command  => "${android::config::sdk_dir}/bin/android update sdk --all --no-ui --filter ${filter}",
       provider => 'shell',
       timeout  => 0,
       creates  => $dest,
